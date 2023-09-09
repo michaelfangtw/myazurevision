@@ -68,14 +68,14 @@ gcloud container clusters get-credentials my-cluster --zone us-central1-c --proj
 #set your prject
 gcloud config set project my-kubernates-398208
 
-#build images
+#build your images
 docker build -t michaelfangtw/myazurevision:1.0 .
 
-#push to docker hub
+#push your images to docker hub
 docker push michaelfangtw/myazurevision:1.0
 kubectl delete deployment myazurevision  
 
-#k8s deploy workloads images
+#k8s deploy workloads from docker hub registry 
 kubectl create deployment myazurevision  --image=michaelfangtw/myazurevision:1.0
 
 #export workloads to public ip / port
