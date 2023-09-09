@@ -398,4 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 *.bat
 *.json
-upload/*
+*/upload/*
