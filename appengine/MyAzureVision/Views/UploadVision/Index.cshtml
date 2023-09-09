@@ -1,0 +1,90 @@
+﻿@model VisionFileModel
+@{
+    ViewData["Title"] = "Computer Vision";
+    var msg=TempData["msg"];
+
+    var isAdultContent = string.Format("{0}",TempData["IsAdultContent"]);
+    var isRacyContent = string.Format("{0}",TempData["IsRacyContent"]);
+    var isGoryContent = string.Format("{0}",TempData["IsGoryContent"]);
+    var adultScore = string.Format("{0}",TempData["AdultScore"]);
+    var racyScore = string.Format("{0}",TempData["RacyScore"]);
+    var goreScore = string.Format("{0}", TempData["GoreScore"]);
+    var format = string.Format("{0}",TempData["format"]);
+    var height = string.Format("{0}",TempData["height"]);
+    var width = string.Format("{0}", TempData["width"]);
+    var imageUrl = string.Format("{0}",TempData["imageUrl"]);
+    var uploadFileName = string.Format("{0}", TempData["uploadFileName"]);
+    var uploadImageUrl = "";
+    if (uploadFileName != null)
+    {
+        uploadImageUrl =  "upload/"+uploadFileName;
+    }
+    var cost = string.Format("{0}", TempData["cost"]);
+
+    var defaultUrl = "https://th.bing.com/th/id/OIP.Nw3oFjyS-8XMr_NO9-oHmAHaEK?pid=ImgDet&rs=1";
+}
+   
+<form class="col-md-8" asp-action="Create" enctype="multipart/form-data">   
+     <div asp-validation-summary="ModelOnly" class="text-danger"></div>      
+
+    <div class="form-group" style="width:90%">               
+        
+        成人 範例1: https://ei.phncdn.com/videos/202308/28/438330531/original/(m=eafTGgaaaa)(mh=Oa-TcG-psDcxhNsK)8.jpg   <br />
+        血腥 範例2: https://th.bing.com/th/id/OIP.Nw3oFjyS-8XMr_NO9-oHmAHaEK?pid=ImgDet&rs=1   <br />
+        <hr />
+        1.提供:ImageUrl: <input asp-for="ImageUrl" value="@defaultUrl" style="width:90%" required /><br />
+        <div class="form-group">
+        <hr />
+    </div>    
+    <div class="form-group">
+        <input type="submit" value="送出"/>
+    </div>
+</form>
+<hr />
+
+<form class="col-md-8" asp-action="Create" enctype="multipart/form-data">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group" style="width:90%">
+        <div class="form-group">
+            <hr />
+            2.提供上傳檔案: <input asp-for="MyImage" type="file" accept=".png,.jpg" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="送出" />
+    </div>
+</form>
+
+
+@if (msg != null)
+{
+    <div class="form-group" style="color:red">@msg </div>   
+}
+
+
+
+@if (!string.IsNullOrEmpty(isAdultContent))
+{
+    <div class="form-group"> IsAdultContent:  @isAdultContent  , score=@adultScore</div>
+    <div class="form-group"> IsRacyContent:  @isRacyContent , score=@racyScore </div>
+    <div class="form-group"> IsGoryContent:  @isGoryContent , score=@goreScore </div>
+    <div class="form-group"> format:  @format</div>
+    <div class="form-group"> height:  @height</div>
+    <div class="form-group"> width:  @width</div>
+    @if (!string.IsNullOrEmpty(imageUrl))
+    {
+        <div class="form-group"> imageUrl:  @imageUrl</div>
+        <img src="@imageUrl" alt="Sample Image" width="300px" />
+
+    }
+    @if (!string.IsNullOrEmpty(uploadFileName))
+    {
+        <div class="form-group"> imagePath:  @uploadImageUrl</div>
+        <img src="@uploadImageUrl" alt="Sample Image" width="300px" />
+    }
+    <div class="form-group"> 花費時間:  @cost ms</div>
+
+    
+}
+
