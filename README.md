@@ -32,8 +32,8 @@ resources:
   disk_size_gb: 10
 
 env_variables:
-  azure_api_key: ''
-  azure_api_endpoint: ''
+  azure_api_key: 'YOUR_AZURE_API_KEY'
+  azure_api_endpoint: 'YOUR_AZURE_ENDPOINT'
 ```
 ### step 3
 ```
@@ -98,5 +98,5 @@ kubectl get svc --watch
                 secretKeyRef:
                   name: azuresecret
                   key: azure_api_endpoint
-          image: michaelfangtw/myazurevision:1.2v
+          image: michaelfangtw/myazurevision:1.0
 ```
